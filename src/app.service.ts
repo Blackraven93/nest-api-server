@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable, Param } from '@nestjs/common';
+
+// controller
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getHello(@Body() body, @Param() param): string {
+    return `Hello World! ${body} ${param.id}`;
   }
 }

@@ -1,12 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Req, Body } from '@nestjs/common';
+import { Request } from 'express';
 import { AppService } from './app.service';
 
-@Controller()
+// router
+// 서비스를 사용하게 만든다.
+@Controller('birds')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  //* localhost:8000/birds/12/greeting
+  @Get('/:id/greeting')
+  getHello(@Req() req: Request, @Body() Body: Body, @Param() param): string {
+    console.log(param);
+    return this.appService.getHello(Body, param);
   }
 }

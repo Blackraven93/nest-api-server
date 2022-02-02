@@ -4,7 +4,10 @@ import { Body, Injectable, Param } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  getHello(@Body() body, @Param() param): string {
+  getHello(
+      @Body() body,
+      @Param() param
+    ): string {
     return `Hello World! ${body} ${param.id}`;
   }
 }

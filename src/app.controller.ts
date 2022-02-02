@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 // 서비스를 사용하게 만든다.
 @Controller('birds')
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   //* localhost:8000/birds/12/greeting
   @Get('/:id/greeting')

@@ -29,11 +29,11 @@ export class BirdsController {
 
   @Patch(':id')
   updatePartialBird() {
-    return;
+    return 'update partial bird';
   }
 
   @Delete(':id')
   deleteBird() {
-    return;
+    return 'delete bird';
   }
 }

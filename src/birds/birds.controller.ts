@@ -10,7 +10,8 @@ import {
   Put,
   UseFilters,
 } from '@nestjs/common';
-import { HttpExceptionFilter } from 'src/http-exception.filter';
+import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+import { PositiveIntPipe } from 'src/pipe/positiveInt.pipe';
 import { BirdsService } from './birds.service';
 
 @Controller('birds')
@@ -27,7 +28,7 @@ export class BirdsController {
 
   // birds/:id
   @Get(':id')
-  readBird(@Param('id', ParseIntPipe) param) {
+  readBird(@Param('id', ParseIntPipe, PositiveIntPipe) param) {
     console.log(param);
     return `read one bird`;
   }

@@ -1,13 +1,18 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+// middleware와의 차이점은 실행 순서가 다르다
 @Injectable()
-export class LoggingInterceptor implements NestInterceptor {
+export class SuccessInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     console.log('Before...');
 
-    const now = Date.now();
-    return next.handle().pipe(tap(() => console.log(`After... ${Date.now() - now}ms`)));
+    return next.handle().pipe(
+      map(data => ({
+        success: true,
+        data,
+      })),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -9,47 +10,42 @@ import {
   Post,
   Put,
   UseFilters,
+  UseInterceptors,
 } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 import { PositiveIntPipe } from 'src/pipe/positiveInt.pipe';
 import { BirdsService } from './birds.service';
 
 @Controller('birds')
+@UseInterceptors(SuccessInterceptor)
 @UseFilters(HttpExceptionFilter)
 export class BirdsController {
   constructor(private readonly birdsService: BirdsService) {}
 
-  // birds
   @Get()
-  getAllBird() {
-    throw new HttpException('api is broken', 401);
-    return `all Birds`;
-  }
-
-  // birds/:id
-  @Get(':id')
-  readBird(@Param('id', ParseIntPipe, PositiveIntPipe) param) {
-    console.log(param);
-    return `read one bird`;
+  getCurrentBird() {
+    return 'current bird';
   }
 
   @Post()
-  createBird() {
-    return 'create Bird';
+  async signUp(@Body() body) {
+    console.log(body);
+    return 'sign up';
   }
 
-  @Put(':id')
-  updateBird() {
-    return 'update bird';
+  @Post('login')
+  logIn() {
+    return 'login';
   }
 
-  @Patch(':id')
-  updatePartialBird() {
-    return 'update partial bird';
+  @Post('logout')
+  logOut() {
+    return 'logout';
   }
 
-  @Delete(':id')
-  deleteBird() {
-    return 'delete bird';
+  @Post('upload/birds')
+  uploadBirdImg() {
+    return 'uploadImg';
   }
 }

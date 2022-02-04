@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 // 서비스를 사용하게 만든다.
 @Controller('birds')
 export class AppController {
+  // 의존성 주입 패턴
   constructor(private readonly appService: AppService) { }
 
   //* localhost:8000/birds/12/greeting

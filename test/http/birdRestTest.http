@@ -1,0 +1,68 @@
+@scheme=http:
+@host=localhost
+@port = {{$dotenv PORT}}
+@endpoint = {{scheme}}//{{host}}:{{port}}
+@endpointBird={{endpoint}}/birds
+###
+
+###
+GET {{endpoint}} HTTP/1.1
+Content-Type: application/json
+User-Agent: vscode-rest-client
+
+###
+POST {{endpoint}} HTTP/1.1
+Content-Type: application/json
+User-Agent: vscode-rest-client
+
+{
+    "name": "parrot",
+    "email": "reRainbowParrort@gmail.com",
+    "password": "3243253$"
+}
+
+
+###
+GET {{endpointBird}} HTTP/1.1
+Content-Type: application/json
+User-Agent: vscode-rest-client
+
+###
+curl --request GET\
+  --url {{endpointBird}}
+  --data '{}'
+
+###
+
+
+POST {{endpointBird}} HTTP/1.1
+content-type: application/json
+
+{
+    "name": "parrot",
+    "email": "reRainbowParrort@gmail.com",
+    "password": "3243253$",
+    "time": "2022:02:04"
+}
+
+###
+PUT {{endpointBird}}/12 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "parrot",
+    "time": "2022:02:03"
+}
+
+###
+PATCH  {{endpointBird}}/12 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "woodpecker",
+    "time": "2022:02:02"
+}
+
+###
+DELETE {{endpointBird}}/12 HTTP/1.1
+Content-Type: application/json

@@ -24,7 +24,7 @@ import { BirdRequestDto } from './dto/birds.request.dto';
 @UseInterceptors(SuccessInterceptor)
 @UseFilters(HttpExceptionFilter)
 export class BirdsController {
-  constructor(private readonly BirdsService: BirdsService) { }
+  constructor(private readonly BirdsService: BirdsService) {}
 
   @Get()
   getCurrentBird() {

@@ -7,8 +7,6 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 
-console.log(process.env);
-
 @Module({
   imports: [
     ConfigModule.forRoot(),

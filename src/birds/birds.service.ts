@@ -4,10 +4,11 @@ import { BirdRequestDto } from './dto/birds.request.dto';
 import * as bcrypt from 'bcrypt';
 import { Bird } from './birds.schema';
 import { Model } from 'mongoose';
+import { BirdsRepository } from './birds.repository';
 
 @Injectable()
 export class BirdsService {
-  constructor(@InjectModel(Bird.name) private readonly birdModel: Model<Bird>) {}
+  constructor(private readonly birdsRepository: BirdsRepository) {}
 
   async signUp(body: BirdRequestDto) {
     const { email, name, password } = body;

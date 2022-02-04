@@ -1,15 +1,7 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { Bird } from '../birds.schema';
 
-export class BirdRequestDto {
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
+export class BirdRequestDto extends Bird {
 
-  @IsString()
-  @IsNotEmpty()
-  password: string;
-
-  @IsString()
-  @IsNotEmpty()
-  name: string;
 }

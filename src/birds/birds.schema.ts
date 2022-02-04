@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { Document } from 'mongoose';
 
@@ -9,6 +10,11 @@ const options: SchemaOptions = {
 
 @Schema(options)
 export class Bird extends Document {
+  @ApiProperty({
+    example: 'brownWoodpecker@gmail.com',
+    description: 'This is sample email',
+    required: true,
+  })
   @Prop({
     required: true,
     unique: true,
@@ -17,6 +23,11 @@ export class Bird extends Document {
   @IsNotEmpty()
   email: string;
 
+  @ApiProperty({
+    example: 'woodPecker',
+    description: 'This is sample name',
+    required: true,
+  })
   @Prop({
     required: true,
   })
@@ -24,6 +35,11 @@ export class Bird extends Document {
   @IsNotEmpty()
   name: string;
 
+  @ApiProperty({
+    example: '2312$@1asd2#lloe',
+    description: 'This is sample password',
+    required: true,
+  })
   @Prop({
     required: true,
   })
@@ -35,7 +51,7 @@ export class Bird extends Document {
   @IsString()
   imgUrl: string;
 
-  readonly readOnlyData: { id: string, email: string, name: string };
+  readonly readOnlyData: { id: string; email: string; name: string };
 }
 
 export const BirdSchema = SchemaFactory.createForClass(Bird);

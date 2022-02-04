@@ -7,7 +7,7 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class BirdsService {
-  constructor(@InjectModel(Bird.name) private readonly birdModel: Model<Bird>) { }
+  constructor(@InjectModel(Bird.name) private readonly birdModel: Model<Bird>) {}
 
   async signUp(body: BirdRequestDto) {
     const { email, name, password } = body;

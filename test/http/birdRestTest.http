@@ -1,6 +1,7 @@
 @scheme=http:
 @host=localhost
-@port = {{$dotenv PORT}}
+@port={{$dotenv PORT}}
+@token={{$dotenv TOKEM}}
 @endpoint = {{scheme}}//{{host}}:{{port}}
 @endpointBird={{endpoint}}/birds
 ###
@@ -26,6 +27,8 @@ User-Agent: vscode-rest-client
 GET {{endpointBird}} HTTP/1.1
 Content-Type: application/json
 User-Agent: vscode-rest-client
+Authorization: Bearer {{token}}
+
 
 ###
 curl --request GET\

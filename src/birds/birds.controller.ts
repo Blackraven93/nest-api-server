@@ -9,15 +9,20 @@ import {
   Patch,
   Post,
   Put,
+  Req,
   UseFilters,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
+import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 import { PositiveIntPipe } from 'src/pipe/positiveInt.pipe';
+import { Bird } from './birds.schema';
 import { BirdsService } from './birds.service';
 import { ReadOnlyBirdDto } from './dto/bird.dto';
 import { BirdRequestDto } from './dto/birds.request.dto';
@@ -31,9 +36,11 @@ export class BirdsController {
     private readonly authService: AuthService,
   ) {}
 
+  @ApiOperation({ summary: '현재 유저 가져오기' })
+  @UseGuards(JwtAuthGuard)
   @Get()
-  getCurrentBird() {
-    return 'current bird';
+  getCurrentBird(@CurrentUser() bird: Bird) {
+    return bird.readOnlyData;
   }
 
   // swagger 추가 설명

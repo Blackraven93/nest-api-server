@@ -12,6 +12,13 @@ import { BirdRequestDto } from './dto/birds.request.dto';
 export class BirdsRepository {
   constructor(@InjectModel(Bird.name) private readonly birdModel: Model<Bird>) {}
 
+  async findBirdByIdWithoutPassword(birdId: string): Promise<Bird | null> {
+    // 보안상의 이유로 select 뒤에 password만 제외하고 가져온다.
+    // email이나 name 만 가져오고 싶은 경우 select('email name')
+    const bird = await this.birdModel.findById(birdId).select('-password');
+    return bird;
+  }
+
   async findBirdByEmail(email: string): Promise<Bird | null> {
     const bird = await this.birdModel.findOne({ email });
     return bird;

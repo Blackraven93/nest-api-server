@@ -10,6 +10,7 @@ import * as mongoose from 'mongoose';
 
 @Module({
   imports: [
+    //dotenv를 사용하기 위해서 ConfigModule을 적용해야 한다.
     ConfigModule.forRoot(),
     BirdsModule,
     MongooseModule.forRoot(process.env.MONGODB_URI, {

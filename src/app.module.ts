@@ -5,6 +5,7 @@ import { BirdsModule } from './birds/birds.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './auth/auth.module';
 import * as mongoose from 'mongoose';
 
 @Module({
@@ -15,6 +16,7 @@ import * as mongoose from 'mongoose';
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

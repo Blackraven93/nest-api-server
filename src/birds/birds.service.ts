@@ -12,7 +12,7 @@ export class BirdsService {
 
   async signUp(body: BirdRequestDto) {
     const { email, name, password } = body;
-    const isBirdExist = await this.birdModel.exists({ email });
+    const isBirdExist = await this.birdsRepository.existsByEmail(email);
 
     if (isBirdExist) {
       throw new UnauthorizedException('해당 계정은 이미 존재합니다!');
@@ -20,7 +20,7 @@ export class BirdsService {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const bird = await this.birdModel.create({
+    const bird = await this.birdsRepository.create({
       email,
       name,
       password: hashedPassword,

@@ -12,6 +12,11 @@ import { BirdRequestDto } from './dto/birds.request.dto';
 export class BirdsRepository {
   constructor(@InjectModel(Bird.name) private readonly birdModel: Model<Bird>) {}
 
+  async findBirdByEmail(email: string): Promise<Bird | null> {
+    const bird = await this.birdModel.findOne({ email });
+    return bird;
+  }
+
   async existsByEmail(email: string): Promise<boolean> {
     const result = await this.birdModel.exists({ email });
     return result;

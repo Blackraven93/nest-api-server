@@ -13,6 +13,8 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { AuthService } from 'src/auth/auth.service';
+import { LoginRequestDto } from 'src/auth/dto/login.request';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 import { PositiveIntPipe } from 'src/pipe/positiveInt.pipe';
@@ -24,7 +26,10 @@ import { BirdRequestDto } from './dto/birds.request.dto';
 @UseInterceptors(SuccessInterceptor)
 @UseFilters(HttpExceptionFilter)
 export class BirdsController {
-  constructor(private readonly BirdsService: BirdsService) {}
+  constructor(
+    private readonly BirdsService: BirdsService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Get()
   getCurrentBird() {
@@ -49,8 +54,8 @@ export class BirdsController {
   }
 
   @Post('login')
-  logIn() {
-    return 'login';
+  logIn(@Body() data: LoginRequestDto) {
+    return this.authService.jwtLogIn(data);
   }
 
   @Post('logout')

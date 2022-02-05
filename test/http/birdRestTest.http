@@ -34,8 +34,19 @@ curl --request GET\
 
 ###
 
-
 POST {{endpointBird}} HTTP/1.1
+content-type: application/json
+
+{
+    "name": "parrot",
+    "email": "reRainbowParrort@gmail.com",
+    "password": "3243253$",
+    "time": "2022:02:04"
+}
+
+###
+
+POST {{endpointBird}}/login HTTP/1.1
 content-type: application/json
 
 {

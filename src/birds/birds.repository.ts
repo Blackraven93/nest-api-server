@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Bird } from './birds.schema';
+import { Bird } from './services/birds.schema';
 import { BirdRequestDto } from './dto/birds.request.dto';
 
 // 서비스에서 바로 핸들링 하는게 아닌
@@ -11,6 +11,14 @@ import { BirdRequestDto } from './dto/birds.request.dto';
 @Injectable()
 export class BirdsRepository {
   constructor(@InjectModel(Bird.name) private readonly birdModel: Model<Bird>) {}
+
+  async findByIdAndUpdateImg(id: string, fileName: string) {
+    const bird = await this.birdModel.findById(id);
+    bird.imgUrl = `http://localhost:${process.env.PORT}/media/${fileName}`;
+    const newBird = await bird.save();
+    console.log(newBird);
+    return newBird.readOnlyData;
+  }
 
   async findBirdByIdWithoutPassword(birdId: string): Promise<Bird | null> {
     // 보안상의 이유로 select 뒤에 password만 제외하고 가져온다.

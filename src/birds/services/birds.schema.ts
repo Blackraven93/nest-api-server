@@ -47,11 +47,13 @@ export class Bird extends Document {
   @IsNotEmpty()
   password: string;
 
-  @Prop()
+  @Prop({
+    default: `https://www.pikpng.com/pngl/m/80-805523_default-avatar-svg-png-icon-free-download-264157.png`
+  })
   @IsString()
   imgUrl: string;
 
-  readonly readOnlyData: { id: string; email: string; name: string };
+  readonly readOnlyData: { id: string; email: string; name: string; imgUrl: string };
 }
 
 export const BirdSchema = SchemaFactory.createForClass(Bird);
@@ -61,5 +63,6 @@ BirdSchema.virtual('readOnlyData').get(function (this: Bird) {
     id: this.id,
     email: this.email,
     name: this.name,
+    imgUrl: this.imgUrl,
   };
 });

@@ -4,9 +4,12 @@ import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
 import * as expressBasicAuth from 'express-basic-auth';
+import * as path from 'path';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  // 제네릭을 사용하여 express app으로 만들어 주기
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.useGlobalPipes(new ValidationPipe()); //* Class Validation 적용! (birds.schema.ts)
   app.useGlobalFilters(new HttpExceptionFilter());
 
@@ -19,6 +22,12 @@ async function bootstrap() {
       },
     }),
   );
+
+  // static파일 제공
+  // http://localhost:port/media/birds/aaa.png
+  app.useStaticAssets(path.join(__dirname, './common', 'uploads'), {
+    prefix: '/media',
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Title: test')

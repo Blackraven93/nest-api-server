@@ -27,10 +27,10 @@ import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 import { multerOptions } from 'src/common/utils/multer.options';
 import { PositiveIntPipe } from 'src/pipe/positiveInt.pipe';
-import { Bird } from '../services/birds.schema';
-import { BirdsService } from '../birds.service';
-import { ReadOnlyBirdDto } from '../dto/bird.dto';
-import { BirdRequestDto } from '../dto/birds.request.dto';
+import { Bird } from '../birds.schema';
+import { BirdsService } from '../services/birds.service';
+import { ReadOnlyBirdDto } from '../dtos/bird.dto';
+import { BirdRequestDto } from '../dtos/birds.request.dto';
 
 @Controller('birds')
 @UseInterceptors(SuccessInterceptor)

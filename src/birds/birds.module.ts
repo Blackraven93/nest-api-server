@@ -4,8 +4,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from 'src/auth/auth.module';
 import { BirdsController } from './controllers/birds.controller';
 import { BirdsRepository } from './birds.repository';
-import { Bird, BirdSchema } from './services/birds.schema';
-import { BirdsService } from './birds.service';
+import { Bird, BirdSchema } from './birds.schema';
+import { BirdsService } from './services/birds.service';
 
 @Module({
   imports: [

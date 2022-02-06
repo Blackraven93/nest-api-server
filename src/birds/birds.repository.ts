@@ -1,8 +1,8 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Bird } from './services/birds.schema';
-import { BirdRequestDto } from './dto/birds.request.dto';
+import { Bird } from './birds.schema';
+import { BirdRequestDto } from './dtos/birds.request.dto';
 
 // 서비스에서 바로 핸들링 하는게 아닌
 // 여러가지 DB에 요청 처리를 중간에 처리하여

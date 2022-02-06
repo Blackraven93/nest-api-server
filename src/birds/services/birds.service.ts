@@ -1,10 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { BirdRequestDto } from './dto/birds.request.dto';
+import { BirdRequestDto } from '../dtos/birds.request.dto';
 import * as bcrypt from 'bcrypt';
-import { Bird } from './services/birds.schema';
+import { Bird } from '../birds.schema';
 import { Model } from 'mongoose';
-import { BirdsRepository } from './birds.repository';
+import { BirdsRepository } from '../birds.repository';
 
 @Injectable()
 export class BirdsService {

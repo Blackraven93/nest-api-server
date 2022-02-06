@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Bird } from './birds.schema';
 import { BirdRequestDto } from './dtos/birds.request.dto';
 
@@ -24,7 +24,7 @@ export class BirdsRepository {
     return newBird.readOnlyData;
   }
 
-  async findBirdByIdWithoutPassword(birdId: string): Promise<Bird | null> {
+  async findBirdByIdWithoutPassword(birdId: string | Types.ObjectId): Promise<Bird | null> {
     // 보안상의 이유로 select 뒤에 password만 제외하고 가져온다.
     // email이나 name 만 가져오고 싶은 경우 select('email name')
     const bird = await this.birdModel.findById(birdId).select('-password');

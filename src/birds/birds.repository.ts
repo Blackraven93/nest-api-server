@@ -12,6 +12,10 @@ import { BirdRequestDto } from './dto/birds.request.dto';
 export class BirdsRepository {
   constructor(@InjectModel(Bird.name) private readonly birdModel: Model<Bird>) {}
 
+  async findAll() {
+    return await this.birdModel.find();
+  }
+
   async findByIdAndUpdateImg(id: string, fileName: string) {
     const bird = await this.birdModel.findById(id);
     bird.imgUrl = `http://localhost:${process.env.PORT}/media/${fileName}`;

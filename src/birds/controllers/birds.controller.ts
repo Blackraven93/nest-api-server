@@ -39,7 +39,13 @@ export class BirdsController {
   constructor(
     private readonly BirdsService: BirdsService,
     private readonly authService: AuthService,
-  ) { }
+  ) {}
+
+  @ApiOperation({ summary: '모든 유저 가져오기' })
+  @Get('all')
+  getAllBird() {
+    return this.BirdsService.getAllBird();
+  }
 
   @ApiOperation({ summary: '현재 유저 가져오기' })
   @UseGuards(JwtAuthGuard)

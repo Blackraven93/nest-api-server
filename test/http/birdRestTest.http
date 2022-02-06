@@ -41,10 +41,10 @@ POST {{endpointBird}} HTTP/1.1
 content-type: application/json
 
 {
-    "name": "parrot",
-    "email": "reRainbowParrort@gmail.com",
-    "password": "3243253$",
-    "time": "2022:02:04"
+    "name": "woodpecker",
+    "email": "reBrownWoodpecker@gmail.com",
+    "password": "324325332$",
+    "time": "2022:02:06"
 }
 ### Upload test
 
@@ -60,9 +60,9 @@ POST {{endpointBird}}/login HTTP/1.1
 content-type: application/json
 
 {
-    "name": "parrot",
-    "email": "reRainbowParrort@gmail.com",
-    "password": "3243253$",
+    "name": "woodpecker",
+    "email": "reBrownWoodpecker@gmail.com",
+    "password": "324325332$",
     "time": "2022:02:04"
 }
 

@@ -10,6 +10,12 @@ import { BirdsRepository } from './birds.repository';
 export class BirdsService {
   constructor(private readonly birdsRepository: BirdsRepository) {}
 
+  async getAllBird() {
+    const allBird = await this.birdsRepository.findAll();
+    const readOnlyBirds = allBird.map(bird => bird.readOnlyData);
+    return readOnlyBirds;
+  }
+
   async signUp(body: BirdRequestDto) {
     const { email, name, password } = body;
     const isBirdExist = await this.birdsRepository.existsByEmail(email);
